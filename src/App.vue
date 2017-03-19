@@ -12,8 +12,9 @@
         <li @click="showSide()" class="sidebar-item"><router-link class="linker" to="/about">About</router-link></li>
       </ul>
     </aside>
-
-    <router-link id="logo" to="/">WANG LAB @ HKUST</router-link>
+    <div id="lab-header">
+      <router-link id="logo" to="/">WANG LAB @ HKUST</router-link>
+    </div>
     <router-view></router-view>
   </div>
 </template>
@@ -63,7 +64,7 @@
   }
 </script>
 
-<style scoped>
+<style>
   @import "../node_modules/font-awesome/css/font-awesome.min.css";
 
   #app {
@@ -74,7 +75,7 @@
     color: #2c3e50;
 
     width: 100%;
-    max-width: 960px;
+    max-width: 1080px;
     margin: 120px 100px auto;
   }
 
@@ -94,9 +95,9 @@
   }
 
   #side-toggle {
-    position: fixed;
-    right: 100px;
-    top: 60px;
+    position: absolute;
+    right: -50px;
+    top: -50px;
 
     font-size: 42px;
     text-align: center;
@@ -105,7 +106,7 @@
   }
 
   #mask {
-    position: fixed;
+    position: absolute;
     width: 100%;
     height: 100%;
     background-color: transparent;
@@ -142,5 +143,8 @@
   .linker {
     color: inherit;
     text-decoration: none;
+  }
+  #lab-header {
+    width: 270px;
   }
 </style>

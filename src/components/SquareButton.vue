@@ -25,6 +25,7 @@
           display: 'block',
           letterSpacing: '0',
           fontWeight: '300',
+          margin: '0 20px',
           color: this.hovering ? 'white' : 'transparent',
           transition: 'all 0.5s ease'
         }

@@ -3,6 +3,8 @@ import Router from 'vue-router'
 
 import NotFound from '@/components/NotFound'
 import Header from '@/components/Header'
+import PatientList from '@/components/PatientList.vue'
+import PatientDetail from '@/components/PatientDetail.vue'
 
 Vue.use(Router)
 
@@ -13,6 +15,16 @@ export default new Router({
       path: '/',
       name: 'Header',
       component: Header
+    },
+    {
+      path: '/list',
+      name: 'List',
+      component: PatientList
+    },
+    {
+      path: '/patient/:id',
+      name: 'Patient',
+      component: PatientDetail
     },
     {
       path: '*',
