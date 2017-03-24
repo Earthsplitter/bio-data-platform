@@ -1,17 +1,17 @@
 <template>
   <article>
     <h1>Overview</h1>
-    <section v-if="data">
-      <my-table :rawData="data"></my-table>
-    </section>
+    <!-- Before AJAX loading data, show the loading warnning -->
+    <my-table v-if="data" :rawData="data"></my-table>
     <section v-else>
       <p>Loading</p>
     </section>
+
   </article>
 </template>
 
 <script>
-  import Table from './Table.vue'
+  import Table from './Table/Table.vue'
 
   export default {
     name: 'PatientList',

@@ -17,7 +17,7 @@ export default new Router({
       component: Header
     },
     {
-      path: '/list',
+      path: '/list/:page*',
       name: 'List',
       component: PatientList
     },
