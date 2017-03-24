@@ -15,29 +15,7 @@ router
     let request = queryString.parse(ctx.querystring)
     switch (request.type) {
       case 'overview':
-        ctx.body = JSON.stringify({
-          headers: [
-            {
-              name: 'Sample',
-              sortable: true,
-              leadTo: true
-            },
-            {
-              name: 'Chromosome',
-              sortable: true
-            }, 'Start', 'End', 'Num_Probes', 'CN', 'Name',
-            {
-              name: 'Segment_Mean',
-              sortable: true
-            }
-          ],
-          tableData: [
-            ['R001R', 1, 762097, 48825470, 4601, 'NA', 'CA', 0.106721110874087],
-            ['R002R', 2, 48850915, 121310748, 3450, 'NA', 'CA', 0.17297640033504],
-            ['R003R', 3, 142540165, 150772262, 328, 'NA', 'CA', ''],
-            ['R001R', 4, 48850915, 121310748, 3450, 'NA', 'CA', ''], ['R001R', 1, 48850915, 121310748, 3450, 'NA', 'CA', ''], ['R001R', 6, 48850915, 121310748, 3450, 'NA', 'CA', '']
-          ]
-        })
+        await send(ctx, './src/server/testData.json')
     }
   })
   .use(staticWare('dist'))
@@ -51,4 +29,4 @@ app
   .use(router.routes())
   .use(router.allowedMethods());
 
-app.listen(3000);
+app.listen(8080);
