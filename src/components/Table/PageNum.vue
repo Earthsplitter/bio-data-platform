@@ -19,7 +19,7 @@
 
 <style scoped>
   #pages {
-    margin-top: 15px;
+    margin: 15px 0;
     display: flex;
     justify-content: center;
   }
