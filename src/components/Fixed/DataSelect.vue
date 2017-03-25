@@ -1,7 +1,7 @@
 <template>
-  <aside @mouseleave="showTag = false" :style="left">
+  <nav @mouseleave="showTag = false" :style="left">
     <ul id="list">
-      <li><router-link active-class="active-link" class="link" to="/list">OverView</router-link></li>
+      <li v-for="tag in tags"><router-link active-class="active-link" class="link" :to="tag.address">{{tag.name}}</router-link></li>
       <li>Cancer A</li>
       <li>Cancer B</li>
       <hr id="blocker"/>
@@ -9,7 +9,7 @@
       <li><router-link active-class="active-link" class="link" to="/input">Input</router-link></li>
     </ul>
     <span id="tag" @mouseover="showTag = true">Type</span>
-  </aside>
+  </nav>
 </template>
 
 <script>
@@ -20,6 +20,7 @@
         showTag: false
       }
     },
+    props: ['tags'],
     computed: {
       left () {
         return {
@@ -34,7 +35,7 @@
   * {
     box-sizing: border-box;
   }
-  aside {
+  nav {
     display: flex;
     align-items: flex-start;
     position: fixed;

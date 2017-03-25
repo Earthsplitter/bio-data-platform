@@ -7,7 +7,7 @@
       <p>Loading</p>
     </section>
 
-    <data-select></data-select>
+    <data-select :tags="navTags"></data-select>
   </article>
 </template>
 
@@ -28,7 +28,12 @@
       return {
         // core data (table header, data)
         // fetch from server
-        data: false
+        data: false,
+        navTags: [{
+          name: 'Overview',
+          address: '/list'
+        }
+        ]
       }
     },
     components: {

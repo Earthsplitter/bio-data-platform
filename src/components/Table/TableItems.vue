@@ -15,7 +15,7 @@
     <tr id="data" v-for="patient in showData">
       <td v-for="(item, key) in patient">
           <span v-if="headers[key].leadTo">
-            <router-link class="link-item" :to="'/patient/'+item">{{item}}</router-link>
+            <router-link class="link-item" :to="'/'+headers[key].leadTo+'/'+item">{{item}}</router-link>
           </span>
         <span v-else>
             {{item}}
