@@ -7,11 +7,13 @@
       <p>Loading</p>
     </section>
 
+    <data-select></data-select>
   </article>
 </template>
 
 <script>
   import Table from './Table/Table.vue'
+  import DataSelect from './Fixed/DataSelect.vue'
 
   export default {
     name: 'PatientList',
@@ -30,7 +32,8 @@
       }
     },
     components: {
-      'my-table': Table
+      'my-table': Table,
+      'data-select': DataSelect
     }
   }
 </script>
