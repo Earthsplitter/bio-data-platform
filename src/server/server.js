@@ -9,13 +9,19 @@ const staticWare = require('koa-static');
 const router = require('koa-router')();
 const app = new Koa();
 const queryString = require('querystring');
+let sql = require('./fetch-data.js')
 
 router
   .get('/data', async (ctx, next) => {
     let request = queryString.parse(ctx.querystring)
     switch (request.type) {
       case 'overview':
-        await send(ctx, './src/server/testData.json')
+        let sqlserver = sql.SQLserver();
+        sqlserver.connect();
+        let rawdata = await sql.SQLquery(sqlserver, "select * from clinic");
+        console.log(rawdata);
+        let data = sql.fetch_patient_list(rawdata);
+        ctx.body = data;
     }
   })
   .use(staticWare('dist'))
@@ -24,7 +30,6 @@ router
     // ./ 在 require() 中使用是跟 __dirname 的效果相同，不会因为启动脚本的目录不一样而改变，在其他情况下跟 process.cwd() 效果相同，是相对于启动脚本所在目录的路径。
     await send(ctx, './dist/index.html')
   });
-
 app
   .use(router.routes())
   .use(router.allowedMethods());
