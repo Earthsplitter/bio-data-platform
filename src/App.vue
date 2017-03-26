@@ -16,6 +16,9 @@
       <router-link id="logo" to="/">WANG LAB @ HKUST</router-link>
     </div>
     <router-view></router-view>
+    <footer id="footer">
+      <p>© 2017 Technical Supported By <a style="color: black" href="https://github.com/Earthsplitter">Ming Wen</a></p>
+    </footer>
   </div>
 </template>
 
@@ -40,7 +43,7 @@
           width: this.sidebarShowing ? '300px' : '0',
           backgroundColor: '#555',
           color: 'white',
-          zIndex: '3',
+          zIndex: this.sidebarShowing ? '3' : '-10',
           transition: 'width 0.5s ease'
         }
       },
@@ -146,5 +149,10 @@
   }
   #lab-header {
     width: 270px;
+  }
+  #footer {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 12px;
   }
 </style>
