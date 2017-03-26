@@ -57,7 +57,7 @@ let fetch_patient_list = function(data){
       element.hypermutation, element.surgical_interval, element.overall_survival, element.age];
     output.tableData.push(newelement);
   });
-  console.log(output);
+  console.log(JSON.stringify(output));
   return output;
 };
 

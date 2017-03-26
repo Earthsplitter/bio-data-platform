@@ -19,9 +19,8 @@ router
         let sqlserver = sql.SQLserver();
         sqlserver.connect();
         let rawdata = await sql.SQLquery(sqlserver, "select * from clinic");
-        console.log(rawdata);
         let data = sql.fetch_patient_list(rawdata);
-        ctx.body = data;
+        ctx.body = JSON.stringify(data);
     }
   })
   .use(staticWare('dist'))

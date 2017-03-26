@@ -3,7 +3,7 @@
     <tr>
       <th v-for="(head, key) in headers">
         <!-- do sort when click -->
-        <span v-if="head.sortable" :id="key" @click="sort($event)" class="sortable-column">
+        <span v-if="head.name" :id="key" @click="sort($event)" class="sortable-column">
               {{head.name}} <i :class="'fa ' + sortState[key]"></i>
             </span>
         <span v-else>
