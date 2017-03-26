@@ -41,5 +41,6 @@
   .active-page {
     background-color: #00bc9b;
     color: white;
+    cursor: not-allowed;
   }
 </style>

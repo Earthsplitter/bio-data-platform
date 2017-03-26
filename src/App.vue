@@ -4,7 +4,7 @@
     <div @click="showSide()" :style="maskShown" id="mask"></div>
     <aside :style="sidebarStyle">
       <span @click="showSide()" :style="closeButton" class="fa fa-close close-button"></span>
-      <h1 id="sidebar-title">Menu</h1>
+      <h1 :style="menuShowing" id="sidebar-title">Menu</h1>
       <ul id="sidebar-list">
         <li @click="showSide()" class="sidebar-item"><router-link class="linker" to="/">Home</router-link></li>
         <li @click="showSide()" class="sidebar-item"><router-link class="linker" to="/list">Patient List</router-link></li>
@@ -31,6 +31,11 @@
       }
     },
     computed: {
+      menuShowing () {
+        return {
+          display: this.sidebarShowing ? 'block' : 'none'
+        }
+      },
       sidebarStyle () {
         return {
           display: 'flex',
@@ -43,7 +48,7 @@
           width: this.sidebarShowing ? '300px' : '0',
           backgroundColor: '#555',
           color: 'white',
-          zIndex: this.sidebarShowing ? '3' : '-10',
+          zIndex: '3',
           transition: 'width 0.5s ease'
         }
       },

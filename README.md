@@ -1,21 +1,64 @@
 # bio-data-platform
 
-> A Vue.js project
+> A patient-oriented data platform for Wang's Lab at HKUST, Based on Vue.js and Koa2
 
 ## Build Setup
 
 ``` bash
+# clone or Download this project
+
 # install dependencies
 npm install
 
-# serve with hot reload at localhost:8080
-npm run dev
+# set up database with mysql
+wait for finish
 
 # build for production with minification
 npm run build
 
-# build for production and view the bundle analyzer report
-npm run build --report
+# run server in the root directory
+node src/server/server.js
+
+# visit page on localhost:8080
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## Rest API
+
+### Overview Table Data
+
+**API**: `/data?type=overview&sequence=0`
+
+**Used Component**: `PatientList.vue`
+
+**Explain**: Fetch the overview table data
+
+**Return Format**: `{ headers: [ { name: string, leadTo: string, sortable: boolean} ], tableData[ [rowData] ]`
+
+**Example**:
+```json
+  {
+     "headers":[
+       {
+         "name":"ID",
+         "leadTo": "patient"
+       },
+       "SNV Pipeline",
+       {
+         "name":"Cohort",
+         "sortable":true
+       }
+     ],
+     "tableData":[
+        [
+          "R001",
+          "SAVI2",
+          "INCB"
+        ],
+        [
+          "R001",
+          "SAVI2",
+          "INCB"
+        ]
+     ]
+  }
+```
