@@ -30,7 +30,7 @@ node src/server/server.js
 *  API: `/data?type=overview&sequence=0`
 *  Used Component: `PatientList.vue`
 *  Explain: Fetch the overview table data
-*  Return Format: `{ headers: [ { name: string, leadTo: string, sortable: boolean} ], tableData[ [rowData] ]`
+*  Return Format: `{ headers: [ { name: string, leadTo: string, sortable: boolean} ], tableData[[rowData]]`
 *  Example:
 ```json
   {
