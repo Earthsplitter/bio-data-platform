@@ -121,9 +121,21 @@
         // sort
         this.data.tableData.sort((a, b) => {
           if (this.sortOrder[index]) {
-            return a[index] < b[index]
+            if (a[index] === b[index]) {
+              return 0
+            } else if (a[index] < b[index]) {
+              return -1
+            } else {
+              return 1
+            }
           } else {
-            return b[index] < a[index]
+            if (a[index] === b[index]) {
+              return 0
+            } else if (a[index] > b[index]) {
+              return -1
+            } else {
+              return 1
+            }
           }
         })
       },
