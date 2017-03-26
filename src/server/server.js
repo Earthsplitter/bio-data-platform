@@ -12,10 +12,14 @@ const queryString = require('querystring');
 
 router
   .get('/data', async (ctx, next) => {
-    let request = queryString.parse(ctx.querystring)
+    let request = queryString.parse(ctx.querystring);
     switch (request.type) {
       case 'overview':
-        await send(ctx, './src/server/testData.json')
+        await send(ctx, './src/server/testData.json');
+        break;
+      case 'detailTabs':
+        ctx.body = ['AAA', 'BBB', 'CCC', 'DDD', 'EEE'];
+        break;
     }
   })
   .use(staticWare('dist'))

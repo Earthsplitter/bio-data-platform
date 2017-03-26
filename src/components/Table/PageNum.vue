@@ -4,7 +4,7 @@
     <router-link key="page" active-class="active-page" class="pageButton" v-for="page in pageTag.tags"
                  :to="'/list/'+page">{{page}}
     </router-link>
-    <input class="goto" @keyup.enter="setPage" v-model="gotoPage">
+    <input class="goto" @keyup.enter="setPage" @blur="setPage" v-model="gotoPage">
     <router-link active-class="active-page" class="pageButton" style="width: 42px" :to="'/list/'+pageTag.totalPages">
       末页
     </router-link>
