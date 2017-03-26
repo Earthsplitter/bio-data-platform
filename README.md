@@ -35,27 +35,21 @@ node src/server/server.js
 ```json
   {
      "headers":[
-       {
-         "name":"ID",
+       { "name":"ID",
          "leadTo": "patient"
        },
        "SNV Pipeline",
-       {
-         "name":"Cohort",
+       { "name":"Cohort",
          "sortable":true
        }
      ],
      "tableData":[
-        [
-          "R001",
+        [ "R001",
           "SAVI2",
-          "INCB"
-        ],
-        [
-          "R001",
+          "INCB"],
+        [ "R001",
           "SAVI2",
-          "INCB"
-        ]
+          "INCB"]
      ]
   }
 ```
