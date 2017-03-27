@@ -22,7 +22,7 @@
       }
     },
     created: function () {
-      fetch('/data?type=detail&cat=' + this.$route.params.category)
+      fetch('/data?type=detail&id=' + this.$route.params.id + '&cat=' + this.$route.params.category)
         .then(response => {
           return response.json()
         })

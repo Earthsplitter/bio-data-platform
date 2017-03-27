@@ -59,7 +59,7 @@ node src/server/server.js
 
 ### Patient Detail Tabs
 
-*  API: `/data?type=detailTabs`
+*  API: `/data?type=detailTabs&id=` + `patientID`
 *  Fetching Component: `PatientDetail.vue`
 *  Digest Component: `TabsSwitch.vue`
 *  Explain: Fetch how many tabs in Patient Detail and their names
@@ -71,7 +71,7 @@ node src/server/server.js
 
 ### Patient Detail Table
 
-*  API: `/data?type=detail&cat=` + `tabName`(must the same as tab name in `Patient Detail Tabs`)
+*  API: `/data?type=detail&id=` + `patientID` +`&cat=` + `tabName`(must the same as tab name in `Patient Detail Tabs`)
 *  Fetching Component: `DetailData.vue`
 *  Digest Component: `Table.vue`
 *  Explain: Fetch corresponding table data in detail tabs
