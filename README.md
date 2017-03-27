@@ -1,6 +1,7 @@
 # bio-data-platform
 
 > A patient-oriented data platform for Wang's Lab at HKUST, Based on Vue.js and Koa2
+Here is the [demo](http://139.199.228.109:8080)
 
 ## Build Setup
 
