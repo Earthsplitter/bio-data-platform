@@ -12,8 +12,8 @@
 </template>
 
 <script>
-  import Table from './Table/Table.vue'
-  import DataSelect from './Fixed/DataSelect.vue'
+  import Table from '../Table/Table.vue'
+  import DataSelect from '../Utilities/DataSelect.vue'
 
   export default {
     name: 'PatientList',

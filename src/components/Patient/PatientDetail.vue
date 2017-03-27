@@ -1,18 +1,19 @@
 <template>
   <article>
     <h1>Patient {{$route.params.id}} Details</h1>
-
-    <section id="tabs-group">
-      <router-link v-for="tab in tabs" class="tab" :to="'/patient/'+$route.params.id+'/'+tab">{{tab}}</router-link>
-    </section>
-
+    <tabs-switch :tabs="tabs" :path="'/patient/'+$route.params.id+'/'"></tabs-switch>
     <router-view></router-view>
   </article>
 </template>
 
 <script>
+  import TabsSwitch from '../Utilities/TabsSwitch.vue'
+
   export default {
     name: 'PatientDetail',
+    components: {
+      'tabs-switch': TabsSwitch
+    },
     data () {
       return {
         tabs: []
@@ -37,26 +38,5 @@
     line-height: 1.75em;
     margin-bottom: 1em;
     letter-spacing: -0.035em;
-  }
-  #tabs-group {
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-  }
-  .tab {
-    height: 70px;
-    border-radius: 30px;
-    width: 180px;
-    margin: 10px 10px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
-
-    background-color: #00bc9b;
-    color: white;
-
-    text-decoration: none;
   }
 </style>

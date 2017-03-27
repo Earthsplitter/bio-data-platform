@@ -3,7 +3,7 @@ import Router from 'vue-router'
 
 import NotFound from '../components/NotFound'
 import Header from '../components/Header'
-import PatientList from '../components/PatientList.vue'
+import PatientList from '../components/Patient/PatientList.vue'
 import PatientDetail from '../components/Patient/PatientDetail.vue'
 import DetailData from '../components/Patient/DetailData.vue'
 

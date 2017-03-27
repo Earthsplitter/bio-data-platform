@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  import SquareButton from './SquareButton.vue'
+  import SquareButton from './Utilities/SquareButton.vue'
   export default {
     name: 'Menu',
     components: {
