@@ -44,7 +44,7 @@
         advanceShowing: false,
         advanceModel: [],
 
-        itemsPerPage: 10
+        itemsPerPage: 20
       }
     },
     computed: {

@@ -13,14 +13,21 @@ let sql = require('./fetch-data.js')
 
 router
   .get('/data', async (ctx, next) => {
-    let request = queryString.parse(ctx.querystring)
+    let request = queryString.parse(ctx.querystring);
     switch (request.type) {
       case 'overview':
-        let sqlserver = sql.SQLserver();
-        sqlserver.connect();
-        let rawdata = await sql.SQLquery(sqlserver, "select * from clinic");
-        let data = sql.fetch_patient_list(rawdata);
-        ctx.body = JSON.stringify(data);
+        await send(ctx, './src/server/testData.json');
+        break;
+      case 'detailTabs':
+        ctx.body = ['AAA', 'BBB', 'CCC', 'DDD', 'EEE'];
+        break;
+      case 'detail' :
+        switch (request.cat) {
+          default:
+            await send(ctx, './src/server/testData.json');
+            break;
+        }
+        break;
     }
   })
   .use(staticWare('dist'))

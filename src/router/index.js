@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import NotFound from '@/components/NotFound'
-import Header from '@/components/Header'
-import PatientList from '@/components/PatientList.vue'
-import PatientDetail from '@/components/PatientDetail.vue'
+import NotFound from '../components/NotFound'
+import Header from '../components/Header'
+import PatientList from '../components/Patient/PatientList.vue'
+import PatientDetail from '../components/Patient/PatientDetail.vue'
+import DetailData from '../components/Patient/DetailData.vue'
 
 Vue.use(Router)
 
@@ -24,7 +25,13 @@ export default new Router({
     {
       path: '/patient/:id',
       name: 'Patient',
-      component: PatientDetail
+      component: PatientDetail,
+      children: [
+        {
+          path: ':category',
+          component: DetailData
+        }
+      ]
     },
     {
       path: '*',
