@@ -20,7 +20,7 @@
       }
     },
     created: function () {
-      fetch('/data?type=detailTabs')
+      fetch('/data?type=detailTabs&id=' + this.$route.params.id)
         .then((response) => {
           return response.json()
         })
