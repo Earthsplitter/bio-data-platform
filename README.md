@@ -33,8 +33,8 @@ node src/server/server.js
 *  Digest Component: `Table.vue`
 *  Explain: Fetch the overview table data
 *  Return Format: `{ headers: [{ name: string, leadTo: string, sortable: boolean}], tableData: [[rowData]] }`
-*  Example:
-<span id="TableData"/>
+*  <span id="TableData">Example</span>:
+
 ```json
   {
      "headers":[
