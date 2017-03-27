@@ -19,8 +19,8 @@
         tabs: []
       }
     },
-    beforeMount: function () {
-      fetch('/data?type=detailTabs&sequence=0')
+    created: function () {
+      fetch('/data?type=detailTabs')
         .then((response) => {
           return response.json()
         })

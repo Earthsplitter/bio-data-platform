@@ -20,6 +20,13 @@ router
       case 'detailTabs':
         ctx.body = ['AAA', 'BBB', 'CCC', 'DDD', 'EEE'];
         break;
+      case 'detail' :
+        switch (request.cat) {
+          default:
+            await send(ctx, './src/server/testData.json');
+            break;
+        }
+        break;
     }
   })
   .use(staticWare('dist'))
