@@ -9,7 +9,6 @@ const staticWare = require('koa-static');
 const router = require('koa-router')();
 const app = new Koa();
 const queryString = require('querystring');
-let sql = require('./fetch-data.js')
 
 router
   .get('/data', async (ctx, next) => {
