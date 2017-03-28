@@ -21,7 +21,7 @@
   .tab {
     height: 70px;
     border-radius: 30px;
-    width: 180px;
+    width: 230px;
     margin: 10px 10px;
 
     display: flex;

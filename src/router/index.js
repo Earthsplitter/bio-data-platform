@@ -28,7 +28,7 @@ export default new Router({
       component: PatientDetail,
       children: [
         {
-          path: ':category',
+          path: ':category/:page*',
           component: DetailData
         }
       ]

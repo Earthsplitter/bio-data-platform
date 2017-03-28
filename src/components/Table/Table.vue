@@ -5,7 +5,7 @@
       <input id="quick" class="search" v-model.trim="quickSearch" placeholder="Search here">
       <span id="advance-toggle" @click="showAdvance">Advance</span>
       <section v-if="advanceShowing" id="advance-group">
-        <div v-for="(header, key) in data.headers">
+        <div v-for="(header, key) in rawData.headers">
           <label v-if="header.name" class="advance-search-label" :for="key">{{header.name}}: </label>
           <label v-else class="advance-search-label" :for="key">{{header}}: </label>
 
@@ -14,9 +14,9 @@
       </section>
     </section>
 
-    <table-items :sortState="sortState" :sortOrder="sortOrder" :headers="data.headers"
+    <table-items :sortState="sortState" :sortOrder="sortOrder" :headers="rawData.headers"
                  :showData="showData" :sort="sort"></table-items>
-    <page-num :pageTag="pageTag"></page-num>
+    <page-num :pageTag="pageTag" :path="path"></page-num>
   </section>
 </template>
 
@@ -26,15 +26,13 @@
 
   export default {
     name: 'Table',
-    props: ['rawData'],
+    props: ['rawData', 'path'],
     components: {
       'table-items': TableItems,
       'page-num': PageNum
     },
     data () {
       return {
-        // sorted data for table
-        data: this.rawData,
         // current sort order of each column (initial, direct or inverse)
         sortOrder: [],
         // current mark (fa-sort, caret-up, caret-down)
@@ -78,14 +76,14 @@
         return this.filterData.slice(start, start + this.itemsPerPage)
       },
       filterData () {
-        let filterData = this.data.tableData
+        let filterData = this.rawData.tableData
         if (this.quickSearch !== '') {
           filterData = filterData.filter((item) => {
             return item[0].toLowerCase().includes(this.quickSearch.toLowerCase())
           })
         } else if (this.advanceShowing) {
           // advance search filter
-          this.data.headers.forEach((element, key) => {
+          this.rawData.headers.forEach((element, key) => {
             filterData = filterData.filter((item) => {
               return !this.advanceModel[key] || item[key].toString().includes(this.advanceModel[key].toString())
             })
@@ -98,7 +96,16 @@
       }
     },
     beforeMount: function () {
-      this.data.headers.forEach((element, key) => {
+      this.rawData.headers.forEach((element, key) => {
+        this.advanceModel[key] = ''
+        if (element.sortable === true) {
+          this.sortOrder[key] = 'initial'
+          this.sortState[key] = 'fa-sort'
+        }
+      })
+    },
+    beforeUpdate: function () {
+      this.rawData.headers.forEach((element, key) => {
         this.advanceModel[key] = ''
         if (element.sortable === true) {
           this.sortOrder[key] = 'initial'
@@ -119,7 +126,7 @@
         // change current column icon
         this.sortState[index] = this.sortOrder[index] === true ? 'fa-caret-up' : 'fa-caret-down'
         // sort
-        this.data.tableData.sort((a, b) => {
+        this.rawData.tableData.sort((a, b) => {
           if (this.sortOrder[index]) {
             if (a[index] === b[index]) {
               return 0

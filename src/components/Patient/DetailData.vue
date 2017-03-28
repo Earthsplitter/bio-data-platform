@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Before AJAX loading data, show the loading warnning -->
-    <my-table v-if="data" :rawData="data"></my-table>
+    <my-table :path="'/patient/'+$route.params.id+'/'+$route.params.category" v-if="data" :rawData="data"></my-table>
     <section v-else>
       <p>Loading</p>
     </section>
@@ -21,7 +21,17 @@
         data: false
       }
     },
-    created: function () {
+    beforeRouteUpdate: function (to, from, next) {
+      fetch('/data?type=detail&id=' + to.params.id + '&cat=' + to.params.category)
+        .then(response => {
+          return response.json()
+        })
+        .then(data => {
+          this.data = data
+        })
+      next()
+    },
+    beforeMount: function () {
       fetch('/data?type=detail&id=' + this.$route.params.id + '&cat=' + this.$route.params.category)
         .then(response => {
           return response.json()

@@ -2,7 +2,7 @@
   <article>
     <h1>Overview</h1>
     <!-- Before AJAX loading data, show the loading warnning -->
-    <my-table v-if="data" :rawData="data"></my-table>
+    <my-table path="/list" v-if="data" :rawData="data"></my-table>
     <section v-else>
       <p>Loading</p>
     </section>
