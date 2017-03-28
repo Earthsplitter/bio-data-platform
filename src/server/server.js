@@ -35,7 +35,6 @@ router
     // ./ 在 require() 中使用是跟 __dirname 的效果相同，不会因为启动脚本的目录不一样而改变，在其他情况下跟 process.cwd() 效果相同，是相对于启动脚本所在目录的路径。
     await send(ctx, './dist/index.html')
   });
-
 app
   .use(router.routes())
   .use(router.allowedMethods());
