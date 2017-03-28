@@ -26,6 +26,7 @@
         })
         .then((data) => {
           this.tabs = data
+          this.$router.push('/patient/' + this.$route.params.id + '/' + this.tabs[0])
         })
     }
   }
