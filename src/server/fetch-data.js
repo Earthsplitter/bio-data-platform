@@ -32,10 +32,10 @@ let getPatientDetails = function(connection, category, PatientID){
   let sql = '';
   switch(category){
     case 'Somatic Mutation':
-      sql = 'select gene_name, chromosome, position, vaf_initial, vaf_recurrence from mutation where patient_id=' + PatientID;
+      sql = 'select gene_name, chromosome, position, vaf_initial, vaf_recurrent from mutation where patient_id="' + PatientID + '"';
       break;
     case 'Recurrent Tumor CNV':
-      sql = 'select chromosome, start, end, num_probes, segment_mean from cnv where patient_id=' + PatientID;
+      sql = 'select chromosome, start_position, end_position, num_probes, segment_mean from cnv where patient_id="' + PatientID + '"';
       break;
     default:
       sql = 'select * from clinic where patient_id=' + PatientID;
@@ -91,7 +91,6 @@ let processPatientList = function(data){
 
   //generate table data
   output.tableData = processTableData(data);
-  console.log(JSON.stringify(output));
   return JSON.stringify(output);
 };
 
@@ -115,10 +114,10 @@ let processPatientDetail = function(category, data){
         },
         'Position',
         'VAF_Initial',
-        'VAP_Recurrence'
+        'VAF_Recurrent'
       ];
       break;
-    case 'Recurrent Tumer CNV':
+    case 'Recurrent Tumor CNV':
       headerArray = [
         {
           'name': 'Chromosome',
@@ -139,8 +138,8 @@ let processPatientDetail = function(category, data){
   let output = {};
   output.headers = headerArray;
   output.tableData = processTableData(data);
-  console.log(JSON.stringify(output));
   return JSON.stringify(output);
-}
+};
+
 
 
