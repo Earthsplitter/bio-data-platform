@@ -4,7 +4,7 @@
     <div @click="showSide()" :style="maskShown" id="mask"></div>
     <aside :style="sidebarStyle">
       <span @click="showSide()" :style="closeButton" class="fa fa-close close-button"></span>
-      <h1 id="sidebar-title">Menu</h1>
+      <h1 :style="menuShowing" id="sidebar-title">Menu</h1>
       <ul id="sidebar-list">
         <li @click="showSide()" class="sidebar-item"><router-link class="linker" to="/">Home</router-link></li>
         <li @click="showSide()" class="sidebar-item"><router-link class="linker" to="/list">Patient List</router-link></li>
@@ -16,6 +16,9 @@
       <router-link id="logo" to="/">WANG LAB @ HKUST</router-link>
     </div>
     <router-view></router-view>
+    <footer id="footer">
+      <p>© 2017 Technical Supported By <a style="color: black" href="https://github.com/Earthsplitter">Ming Wen</a></p>
+    </footer>
   </div>
 </template>
 
@@ -28,6 +31,11 @@
       }
     },
     computed: {
+      menuShowing () {
+        return {
+          display: this.sidebarShowing ? 'block' : 'none'
+        }
+      },
       sidebarStyle () {
         return {
           display: 'flex',
@@ -146,5 +154,10 @@
   }
   #lab-header {
     width: 270px;
+  }
+  #footer {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 12px;
   }
 </style>

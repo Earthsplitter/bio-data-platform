@@ -2,14 +2,14 @@
   <section>
     <section id="search-bar">
       <label class="search-label" for="quick">Quick Search: </label>
-      <input id="quick" class="search" v-model="quickSearch" placeholder="Search here">
+      <input id="quick" class="search" v-model.trim="quickSearch" placeholder="Search here">
       <span id="advance-toggle" @click="showAdvance">Advance</span>
       <section v-if="advanceShowing" id="advance-group">
         <div v-for="(header, key) in data.headers">
           <label v-if="header.name" class="advance-search-label" :for="key">{{header.name}}: </label>
           <label v-else class="advance-search-label" :for="key">{{header}}: </label>
 
-          <input :id="key" class="advance-search" v-model="advanceModel[key]" placeholder="Exact Match">
+          <input :id="key" class="advance-search" v-model.trim="advanceModel[key]" placeholder="Exact Match">
         </div>
       </section>
     </section>
@@ -44,7 +44,7 @@
         advanceShowing: false,
         advanceModel: [],
 
-        itemsPerPage: 10
+        itemsPerPage: 20
       }
     },
     computed: {
@@ -121,9 +121,21 @@
         // sort
         this.data.tableData.sort((a, b) => {
           if (this.sortOrder[index]) {
-            return a[index] < b[index]
+            if (a[index] === b[index]) {
+              return 0
+            } else if (a[index] < b[index]) {
+              return -1
+            } else {
+              return 1
+            }
           } else {
-            return b[index] < a[index]
+            if (a[index] === b[index]) {
+              return 0
+            } else if (a[index] > b[index]) {
+              return -1
+            } else {
+              return 1
+            }
           }
         })
       },
