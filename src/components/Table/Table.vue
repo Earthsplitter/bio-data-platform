@@ -16,7 +16,7 @@
 
     <table-items :sortState="sortState" :sortOrder="sortOrder" :headers="data.headers"
                  :showData="showData" :sort="sort"></table-items>
-    <page-num :pageTag="pageTag"></page-num>
+    <page-num :pageTag="pageTag" :path="path"></page-num>
   </section>
 </template>
 
@@ -26,7 +26,7 @@
 
   export default {
     name: 'Table',
-    props: ['rawData'],
+    props: ['rawData', 'path'],
     components: {
       'table-items': TableItems,
       'page-num': PageNum

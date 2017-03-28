@@ -1,11 +1,11 @@
 <template>
   <section id="pages">
-    <router-link active-class="active-page" class="pageButton" style="width: 42px" to="/list/1">首页</router-link>
+    <router-link active-class="active-page" class="pageButton" style="width: 42px" :to="path+'/1'">首页</router-link>
     <router-link key="page" active-class="active-page" class="pageButton" v-for="page in pageTag.tags"
-                 :to="'/list/'+page">{{page}}
+                 :to="path+'/'+page">{{page}}
     </router-link>
     <input class="goto" @keyup.enter="setPage" @blur="setPage" v-model="gotoPage">
-    <router-link active-class="active-page" class="pageButton" style="width: 42px" :to="'/list/'+pageTag.totalPages">
+    <router-link active-class="active-page" class="pageButton" style="width: 42px" :to="path+'/'+pageTag.totalPages">
       末页
     </router-link>
   </section>
@@ -16,7 +16,7 @@
 
   export default {
     name: 'PageNum',
-    props: ['pageTag'],
+    props: ['pageTag', 'path'],
     data () {
       return {
         gotoPage: ''
@@ -25,7 +25,7 @@
     methods: {
       setPage () {
         if (Number(this.gotoPage) > 0 && Number(this.gotoPage) <= this.pageTag.totalPages) {
-          router.push('/list/' + this.gotoPage)
+          router.push(this.path + '/' + this.gotoPage)
           this.gotoPage = ''
         }
       }

@@ -3,29 +3,40 @@
  */
 const Koa = require('koa');
 
-
 const send = require('koa-sendfile');
 const staticWare = require('koa-static');
 const router = require('koa-router')();
 const app = new Koa();
 const queryString = require('querystring');
 
+const SQLProcessor = require('./SQLProcessor');
+const DataSender = require('./DataSender');
+
+let databaseConfig = {
+  "host": "localhost",
+  "user": "root",
+  "password": "wm960229",
+  "database": "bio_platform"
+};
+
+let database = null;
+SQLProcessor.SQLCreate()
+  .then((server) => {
+    database = server;
+  });
+
 router
   .get('/data', async (ctx, next) => {
     let request = queryString.parse(ctx.querystring);
     switch (request.type) {
       case 'overview':
-        await send(ctx, './src/server/testData.json');
+        await DataSender.overview(ctx, database);
         break;
       case 'detailTabs':
-        ctx.body = ['AAA', 'BBB', 'CCC', 'DDD', 'EEE'];
+        DataSender.patientDetailTabs(ctx);
         break;
       case 'detail' :
-        switch (request.cat) {
-          default:
-            await send(ctx, './src/server/testData.json');
-            break;
-        }
+        await DataSender.patientDetail(ctx, request.cat, request.id, database);
         break;
     }
   })
