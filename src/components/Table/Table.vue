@@ -129,31 +129,44 @@
         })
         // change current column icon
         this.sortState[index] = this.sortOrder[index] === true ? 'fa-caret-up' : 'fa-caret-down'
-        // sort
         this.data.tableData.sort((a, b) => {
+          let itemA = a[index]
+          let itemB = b[index]
           if (this.sortOrder[index]) {
-            if (a[index] === b[index]) {
+            if (!isNaN(Number(itemA)) && !isNaN(Number(itemB))) {
+              // Both is Number
+              itemA = Number(itemA)
+              itemB = Number(itemB)
+            } else if (isNaN(Number(itemA)) && !isNaN(Number(itemB))) {
+              // A is String
+              return 1
+            } else if (!isNaN(Number(itemA)) && isNaN(Number(itemB))) {
+              return -1
+            }
+            if (itemA === itemB) {
               return 0
-            } if (a[index].length === b[index].length) {
-              if (a[index] < b[index]) {
-                return -1
-              } else {
-                return 1
-              }
+            } else if (itemA < itemB) {
+              return -1
             } else {
-              return a[index].length - b[index].length
+              return 1
             }
           } else {
-            if (a[index] === b[index]) {
+            if (!isNaN(Number(itemA)) && !isNaN(Number(itemB))) {
+              // Both is Number
+              itemA = Number(itemA)
+              itemB = Number(itemB)
+            } else if (isNaN(Number(itemA)) && !isNaN(Number(itemB))) {
+              // A is String
+              return -1
+            } else if (!isNaN(Number(itemA)) && isNaN(Number(itemB))) {
+              return 1
+            }
+            if (itemA === itemB) {
               return 0
-            } else if (a[index].length === b[index].length) {
-              if (a[index] > b[index]) {
-                return -1
-              } else {
-                return 1
-              }
+            } else if (itemA < itemB) {
+              return 1
             } else {
-              return b[index].length - a[index].length
+              return -1
             }
           }
         })

@@ -104,7 +104,10 @@ let processPatientDetail = function (category, data) {
   switch (category) {
     case 'Somatic Mutation':
       headerArray = [
-        'Gene',
+        {
+          'name': 'Gene',
+          'sortable': true
+        },
         {
           'name': 'Chromosome',
           'sortable': true
