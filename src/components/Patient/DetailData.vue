@@ -22,13 +22,15 @@
       }
     },
     beforeRouteUpdate: function (to, from, next) {
-      fetch('/data?type=detail&id=' + to.params.id + '&cat=' + to.params.category)
-        .then(response => {
-          return response.json()
-        })
-        .then(data => {
-          this.data = data
-        })
+      if (to.params.category !== from.params.category) {
+        fetch('/data?type=detail&id=' + to.params.id + '&cat=' + to.params.category)
+          .then(response => {
+            return response.json()
+          })
+          .then(data => {
+            this.data = data
+          })
+      }
       next()
     },
     beforeMount: function () {

@@ -5,7 +5,7 @@
       <input id="quick" class="search" v-model.trim="quickSearch" placeholder="Search here">
       <span id="advance-toggle" @click="showAdvance">Advance</span>
       <section v-if="advanceShowing" id="advance-group">
-        <div v-for="(header, key) in rawData.headers">
+        <div v-for="(header, key) in data.headers">
           <label v-if="header.name" class="advance-search-label" :for="key">{{header.name}}: </label>
           <label v-else class="advance-search-label" :for="key">{{header}}: </label>
 
@@ -14,7 +14,7 @@
       </section>
     </section>
 
-    <table-items :sortState="sortState" :sortOrder="sortOrder" :headers="rawData.headers"
+    <table-items :sortState="sortState" :sortOrder="sortOrder" :headers="data.headers"
                  :showData="showData" :sort="sort"></table-items>
     <page-num :pageTag="pageTag" :path="path"></page-num>
   </section>
@@ -33,6 +33,7 @@
     },
     data () {
       return {
+        data: this.rawData,
         // current sort order of each column (initial, direct or inverse)
         sortOrder: [],
         // current mark (fa-sort, caret-up, caret-down)
@@ -76,14 +77,14 @@
         return this.filterData.slice(start, start + this.itemsPerPage)
       },
       filterData () {
-        let filterData = this.rawData.tableData
+        let filterData = this.data.tableData
         if (this.quickSearch !== '') {
           filterData = filterData.filter((item) => {
             return item[0].toLowerCase().includes(this.quickSearch.toLowerCase())
           })
         } else if (this.advanceShowing) {
           // advance search filter
-          this.rawData.headers.forEach((element, key) => {
+          this.data.headers.forEach((element, key) => {
             filterData = filterData.filter((item) => {
               return !this.advanceModel[key] || item[key].toString().includes(this.advanceModel[key].toString())
             })
@@ -96,7 +97,7 @@
       }
     },
     beforeMount: function () {
-      this.rawData.headers.forEach((element, key) => {
+      this.data.headers.forEach((element, key) => {
         this.advanceModel[key] = ''
         if (element.sortable === true) {
           this.sortOrder[key] = 'initial'
@@ -105,13 +106,16 @@
       })
     },
     beforeUpdate: function () {
-      this.rawData.headers.forEach((element, key) => {
-        this.advanceModel[key] = ''
-        if (element.sortable === true) {
-          this.sortOrder[key] = 'initial'
-          this.sortState[key] = 'fa-sort'
-        }
-      })
+      if (this.rawData.headers !== this.data.headers) {
+        this.data = this.rawData
+        this.data.headers.forEach((element, key) => {
+          this.advanceModel[key] = ''
+          if (element.sortable === true) {
+            this.sortOrder[key] = 'initial'
+            this.sortState[key] = 'fa-sort'
+          }
+        })
+      }
     },
     methods: {
       sort (event) {
@@ -126,22 +130,30 @@
         // change current column icon
         this.sortState[index] = this.sortOrder[index] === true ? 'fa-caret-up' : 'fa-caret-down'
         // sort
-        this.rawData.tableData.sort((a, b) => {
+        this.data.tableData.sort((a, b) => {
           if (this.sortOrder[index]) {
             if (a[index] === b[index]) {
               return 0
-            } else if (a[index] < b[index]) {
-              return -1
+            } if (a[index].length === b[index].length) {
+              if (a[index] < b[index]) {
+                return -1
+              } else {
+                return 1
+              }
             } else {
-              return 1
+              return a[index].length - b[index].length
             }
           } else {
             if (a[index] === b[index]) {
               return 0
-            } else if (a[index] > b[index]) {
-              return -1
+            } else if (a[index].length === b[index].length) {
+              if (a[index] > b[index]) {
+                return -1
+              } else {
+                return 1
+              }
             } else {
-              return 1
+              return b[index].length - a[index].length
             }
           }
         })
