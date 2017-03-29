@@ -3,20 +3,28 @@
     <h1>Patient {{$route.params.id}} Details</h1>
     <tabs-switch :tabs="tabs" :path="'/patient/'+$route.params.id+'/'"></tabs-switch>
     <router-view></router-view>
+
+    <data-select :tags="navTags"></data-select>
   </article>
 </template>
 
 <script>
   import TabsSwitch from '../Utilities/TabsSwitch.vue'
+  import DataSelect from '../Utilities/DataSelect.vue'
 
   export default {
     name: 'PatientDetail',
     components: {
-      'tabs-switch': TabsSwitch
+      'tabs-switch': TabsSwitch,
+      'data-select': DataSelect
     },
     data () {
       return {
-        tabs: []
+        tabs: [],
+        navTags: [{
+          name: 'Overview',
+          address: '/list'
+        }]
       }
     },
     created: function () {
@@ -27,6 +35,12 @@
         .then((data) => {
           this.tabs = data
           this.$router.push('/patient/' + this.$route.params.id + '/' + this.tabs[0] + '/1')
+          data.forEach((element) => {
+            this.navTags.push({
+              name: element,
+              address: '/patient/' + this.$route.params.id + '/' + element
+            })
+          })
         })
     }
   }

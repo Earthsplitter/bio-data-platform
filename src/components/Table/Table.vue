@@ -97,6 +97,9 @@
       }
     },
     beforeMount: function () {
+      if (!this.$route.params.page) {
+        this.$router.push(this.$router.currentRoute.fullPath + '/1')
+      }
       this.data.headers.forEach((element, key) => {
         this.advanceModel[key] = ''
         if (element.sortable === true) {
@@ -106,6 +109,9 @@
       })
     },
     beforeUpdate: function () {
+      if (!this.$route.params.page) {
+        this.$router.push(this.$router.currentRoute.fullPath + '/1')
+      }
       if (this.rawData.headers !== this.data.headers) {
         this.data = this.rawData
         this.data.headers.forEach((element, key) => {

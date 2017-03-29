@@ -12,8 +12,6 @@
 </template>
 
 <script>
-  import router from '../../router/index.js'
-
   export default {
     name: 'PageNum',
     props: ['pageTag', 'path'],
@@ -25,7 +23,7 @@
     methods: {
       setPage () {
         if (Number(this.gotoPage) > 0 && Number(this.gotoPage) <= this.pageTag.totalPages) {
-          router.push(this.path + '/' + this.gotoPage)
+          this.$router.push(this.path + '/' + this.gotoPage)
           this.gotoPage = ''
         }
       }
