@@ -1,6 +1,6 @@
 <template>
   <section id="tabs-group">
-    <router-link v-for="tab in tabs" class="tab" :to="path+tab">{{tab}}</router-link>
+    <router-link active-class="active-tab" v-for="tab in tabs" class="tab" :to="path+tab">{{tab}}</router-link>
     <hr>
   </section>
 </template>
@@ -29,13 +29,18 @@
     align-items: center;
     font-size: 20px;
 
-    background-color: #00bc9b;
-    color: white;
+    background-color: white;
+    border: solid 1px #00bc9b;
+    color: #00bc9b;
 
     text-decoration: none;
   }
   hr {
     width: 100%;
     border: solid 1px #00bc9b;
+  }
+  .active-tab {
+    background-color: #00bc9b;
+    color: white;
   }
 </style>
