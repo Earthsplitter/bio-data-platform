@@ -1,6 +1,6 @@
 <template>
   <section id="tabs-group">
-    <router-link active-class="active-tab" v-for="tab in tabs" class="tab" :to="path+tab">{{tab}}</router-link>
+    <router-link active-class="active-tab" v-for="tab in tabs" class="tab" :to="path+tab+'/1'">{{tab}}</router-link>
     <hr>
   </section>
 </template>
