@@ -75,6 +75,11 @@
 <style>
   @import "../node_modules/font-awesome/css/font-awesome.min.css";
 
+  body {
+    display: flex;
+    justify-content: center;
+  }
+
   #app {
     position: relative;
     font-family: 'Avenir', Helvetica, Arial, sans-serif;

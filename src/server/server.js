@@ -23,6 +23,9 @@ let database = null;
 SQLProcessor.SQLCreate()
   .then((server) => {
     database = server;
+    setInterval(function () {
+      database.query('SELECT 1');
+    }, 5000);
   });
 
 router

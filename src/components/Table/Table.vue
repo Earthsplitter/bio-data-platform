@@ -110,9 +110,11 @@
     },
     beforeUpdate: function () {
       if (!this.$route.params.page) {
+        // if in index, automatically set to page 1
         this.$router.push(this.$router.currentRoute.fullPath + '/1')
       }
       if (this.rawData.headers !== this.data.headers) {
+        // if table has been changed, reset this.data from parents' props
         this.data = this.rawData
         this.data.headers.forEach((element, key) => {
           this.advanceModel[key] = ''
